@@ -1,0 +1,23 @@
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+sourceSets {
+    main {
+        java {
+            srcDir "$buildDir/generated/source/apt/main"
+        }
+    }
+}
+
+querydsl {
+    // we use mongodb
+//    springDataMongo = true
+    querydslSourcesDir = "$buildDir/generated/source/apt/main"
+}
+
+dependencies {
+    compile group: "com.mysema.querydsl", name: "querydsl-jpa", version: 'RELEASE'
+    compileOnly group: "com.mysema.querydsl", name: "querydsl-apt", version: 'RELEASE'
+
+//    compile "com.querydsl:querydsl-jpa:${querydsl_version}"
+//    compileOnly "com.querydsl:querydsl-apt:${querydsl_version}"
+}
