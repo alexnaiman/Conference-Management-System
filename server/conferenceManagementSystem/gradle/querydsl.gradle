@@ -15,8 +15,8 @@ querydsl {
 }
 
 dependencies {
-    compile group: "com.mysema.querydsl", name: "querydsl-jpa", version: 'RELEASE'
-    compileOnly group: "com.mysema.querydsl", name: "querydsl-apt", version: 'RELEASE'
+    compile group: "com.mysema.querydsl", name: "querydsl-jpa", version: '3.6.3'
+    compileOnly group: "com.mysema.querydsl", name: "querydsl-apt", version: '3.6.3'
 
 //    compile "com.querydsl:querydsl-jpa:${querydsl_version}"
 //    compileOnly "com.querydsl:querydsl-apt:${querydsl_version}"

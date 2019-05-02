@@ -1,6 +1,7 @@
-package com.sapphireDevils.conferenceManagementSystem.Dto;
+package com.sapphireDevils.conferenceManagementSystem.Dto.Auth;
 
 
+import com.sapphireDevils.conferenceManagementSystem.Dto.BaseDto;
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.EntityType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
