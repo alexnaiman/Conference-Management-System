@@ -14,12 +14,13 @@ public class Response {
     }
 
     public Response() {
+
     }
 
-    public static Response getErrorResponse() {
+    public static Response getErrorResponse(String message) {
         Response response = new Response();
         response.setStatus("error");
-
+        response.setData(message);
         return response;
     }
 }

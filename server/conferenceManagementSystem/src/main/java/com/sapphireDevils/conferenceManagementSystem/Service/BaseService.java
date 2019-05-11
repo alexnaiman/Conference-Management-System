@@ -7,10 +7,15 @@ import org.modelmapper.ModelMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Abstract class that offers basic crud functionality for one entity
+ */
 public abstract class BaseService<T extends BaseEntity> {
     public abstract BaseRepository<T> getRepository();
 
     public abstract Class<?> getBaseDtoClass();
+
 
     protected ModelMapper modelMapper;
 
@@ -35,7 +40,6 @@ public abstract class BaseService<T extends BaseEntity> {
 
     public <E> E getOne(int id, Class<E> eClass) {
         return getRepository().findById(id).map((entity) -> modelMapper.map(entity, eClass)).orElse(null);
-//        return modelMapper.map(getRepository().findById(id), eClass);
     }
 
     public <E> List<E> getAll(Class<E> eClass) {

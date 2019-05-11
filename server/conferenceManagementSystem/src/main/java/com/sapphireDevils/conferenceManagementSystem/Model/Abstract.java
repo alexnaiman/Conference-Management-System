@@ -6,16 +6,20 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = true, exclude = {"authors"})
 public class Abstract extends BaseEntity {
 
+    @NotNull
     private String title;
-    private String content; // todo make to store file
+    @NotNull
+    private String content; // TODO make to store file
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 }

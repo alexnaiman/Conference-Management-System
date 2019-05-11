@@ -14,23 +14,24 @@ import javax.annotation.security.RolesAllowed;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-
     @Autowired
     private AuthUtils authUtils;
 
     @GetMapping("/role")
     public String getRoles() {
-        return authUtils.getUser().getRoles().iterator().next().getName();
+
+//        authUtils.testSecurity();
+        return "rest";
     }
 
     @GetMapping("/role2")
     public String getRole2s() {
-        authUtils.testSecurity();
+//        authUtils.testSecurity();
         return authUtils.getUser().getRoles().iterator().next().getName();
     }
 
 
-    @Secured("READ_PRIVILEGE")
+    @Secured("ROLE_USER")
     @GetMapping
     public String showRegistrationForm() {
         return "test";
@@ -42,13 +43,13 @@ public class TestController {
         return "test2";
     }
 
-    @PreAuthorize("hasAuthority('READ_PRIVILEGE')") // DOAR ASTA MERGE
+    @PreAuthorize("hasAuthority('READ_ABSTRACT')") // DOAR ASTA MERGE
     @GetMapping("/test3")
     public String showRegistrationForm3() {
         return "test2";
     }
 
-    @PreAuthorize("hasRole('ROLE_ROLE_USER')")
+    @PreAuthorize("hasRole('READ_ABSTRACT')")
     @GetMapping("/test4")
     public String showRegistrationForm4() {
         return "test2";
@@ -71,4 +72,7 @@ public class TestController {
     public String showRegistrationForm7() {
         return "test2";
     }
+
+
 }
+

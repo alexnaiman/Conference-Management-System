@@ -11,7 +11,6 @@ import lombok.EqualsAndHashCode;
 public class UserAllDataDto extends BaseDto {
     private String name;
     private String email;
-    private String password;
     private String affiliation;
     private String webpage;
     private EntityType entityType;

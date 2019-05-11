@@ -1,12 +1,12 @@
 package com.sapphireDevils.conferenceManagementSystem.Dto;
 
 
+import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserAllDataDto;
 import lombok.Data;
-
-import java.util.Set;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class AuthorDto {
-    private String name;
-    private String email;
+@EqualsAndHashCode(callSuper = true)
+public class AuthorDto extends BaseDto {
+    private UserAllDataDto userData;
 }

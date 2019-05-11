@@ -23,7 +23,7 @@ public class UserPrincipal implements UserDetails {
             System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     }
 
-    Set<? extends GrantedAuthority> authorities = null;
+    Set<? extends GrantedAuthority> authorities;
 
     public User getUser() {
         return user;
@@ -33,6 +33,7 @@ public class UserPrincipal implements UserDetails {
         this.user = user;
     }
 
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -41,26 +42,32 @@ public class UserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
+    @Override
     public String getPassword() {
         return user.getPassword();
     }
 
+    @Override
     public String getUsername() {
         return user.getEmail();
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @Override
     public boolean isEnabled() {
         return true;
     }

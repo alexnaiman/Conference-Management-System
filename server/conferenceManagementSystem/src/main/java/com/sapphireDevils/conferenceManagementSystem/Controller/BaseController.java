@@ -4,8 +4,15 @@ import com.sapphireDevils.conferenceManagementSystem.Model.BaseEntity;
 import com.sapphireDevils.conferenceManagementSystem.Service.BaseService;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * If we need  a simple crud controller we will extend this
+ *
+ * @param <T>
+ */
 public abstract class BaseController<T extends BaseEntity> {
     public abstract BaseService<T> getService();
+
 
     @GetMapping("/{id}")
     public Response getOne(@PathVariable int id) {

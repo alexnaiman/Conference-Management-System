@@ -2,12 +2,9 @@ package com.sapphireDevils.conferenceManagementSystem.Controller.Auth;
 
 import com.sapphireDevils.conferenceManagementSystem.Controller.Response;
 import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserRegisterDto;
-import com.sapphireDevils.conferenceManagementSystem.Repository.UserRepository;
 import com.sapphireDevils.conferenceManagementSystem.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
 @RestController
 @RequestMapping("/register")
@@ -26,7 +23,7 @@ public class RegisterController {
         try {
             return new Response(userService.registerNewUserAccount(registerDto));
         } catch (Exception e) {
-            return Response.getErrorResponse();
+            return Response.getErrorResponse(e.getMessage());
         }
 //        if( userRepository.findByEmail(register.getUser().getEmail()) != null )
 //            return null; // TODO: return error

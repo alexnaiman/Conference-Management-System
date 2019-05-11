@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"abstracts"})
 public class Author extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -19,5 +20,5 @@ public class Author extends BaseEntity {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Abstract> abstracts;
+    private Set<Abstract> abstracts = new HashSet<>();
 }

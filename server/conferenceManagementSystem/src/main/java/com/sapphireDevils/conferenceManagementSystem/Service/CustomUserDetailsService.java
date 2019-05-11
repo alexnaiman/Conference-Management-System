@@ -2,10 +2,8 @@ package com.sapphireDevils.conferenceManagementSystem.Service;
 
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.Privilege;
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.Role;
-import com.sapphireDevils.conferenceManagementSystem.Model.Auth.User;
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.UserPrincipal;
-import com.sapphireDevils.conferenceManagementSystem.Repository.RoleRepository;
-import com.sapphireDevils.conferenceManagementSystem.Repository.UserRepository;
+import com.sapphireDevils.conferenceManagementSystem.Repository.Auth.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,10 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -58,4 +52,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return authorities;
     }
+
+
 }

@@ -18,15 +18,15 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 
-    //    @NotNull
+    @NotNull
     private String name;
     @NotNull
     private String email;
     @NotNull
     private String password;
-    //    @NotNull
+    @NotNull
     private String affiliation;
-    //    @NotNull
+    @NotNull
     private String webpage;
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -34,9 +34,10 @@ public class User extends BaseEntity {
 
     private boolean tokenExpired;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
 }
+
