@@ -10,11 +10,22 @@ export default class LoginRoute extends Component {
   render() {
     const {
       store: {
-        auth: { isLoading, login }
+        auth: { isLoading, register }
       }
     } = this.props;
     return (
-      <div onClick={() => login()}>
+      <div
+        onClick={() =>
+          register({
+            email: "alex@email.com",
+            password: "password",
+            affiliation: "sdfs",
+            webpage: "sdfsd",
+            entityType: "author",
+            name: "Alex"
+          })
+        }
+      >
         <Login />
         {isLoading && "...Loading"}
       </div>
