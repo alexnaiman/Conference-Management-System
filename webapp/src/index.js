@@ -9,6 +9,7 @@ import App from "./routes/App";
 import * as serviceWorker from "./serviceWorker";
 import reset from "./css/reset";
 import browserHistory from "./config/history/history";
+
 import store from "./mobx";
 
 const GlobalStyle = createGlobalStyle`${reset}`;
