@@ -6,6 +6,8 @@ import com.sapphireDevils.conferenceManagementSystem.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/register")
 public class RegisterController {
@@ -25,24 +27,11 @@ public class RegisterController {
         } catch (Exception e) {
             return Response.getErrorResponse(e.getMessage());
         }
-//        if( userRepository.findByEmail(register.getUser().getEmail()) != null )
-//            return null; // TODO: return error
-//        User user = userRepository.save(register.getUser());
-//
-//        if(register.getDonor() != null) {
-//            register.getDonor().setUser(user);
-//            register.getUser().setEntityType(EntityType.DONOR);
-//            return new Response(donorRepository.save(register.getDonor()));
-//        }
-//
-//        if(register.getOrganization() != null) {
-//            System.out.println("here org");
-//            register.getOrganization().setUser(user);
-//            register.getUser().setEntityType(EntityType.ORGANIZATION_ADMIN);
-//            return new Response(organizationRepository.save(register.getOrganization()));
-//        }
-//
-//        return null;
+    }
+
+    @GetMapping("test")
+    public Date test() {
+        return new Date();
     }
 
 }

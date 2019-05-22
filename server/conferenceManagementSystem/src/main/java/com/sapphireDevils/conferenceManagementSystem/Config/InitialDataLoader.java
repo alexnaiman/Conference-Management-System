@@ -49,6 +49,8 @@ public class InitialDataLoader implements
 //        createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
 //        createRoleIfNotFound("ROLE_USER", Collections.singletonList(readPrivilege));
         createRoleIfNotFound(EntityType.AUTHOR.name(), EntityType.AUTHOR.getPrivileges());
+        createRoleIfNotFound(EntityType.STEERING_COMMITTEE.name(), EntityType.STEERING_COMMITTEE.getPrivileges());
+
 //        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
 //        User user = new User();
 //        user.setPassword(passwordEncoder.encode("test"));

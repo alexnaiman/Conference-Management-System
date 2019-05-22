@@ -1,21 +1,23 @@
 package com.sapphireDevils.conferenceManagementSystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sapphireDevils.conferenceManagementSystem.Model.Auth.BaseUser;
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Set;
 
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true)
-public class SteeringCommittee extends BaseEntity {
+@EqualsAndHashCode(callSuper = true, exclude = {"conferences"})
+public class SteeringCommittee extends BaseUser {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    public User user;
+    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Conference> conferences;
 }
