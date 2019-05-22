@@ -4,9 +4,11 @@ import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserAllDataDto;
 import com.sapphireDevils.conferenceManagementSystem.Dto.AuthorDto;
 import com.sapphireDevils.conferenceManagementSystem.Model.Abstract;
 import com.sapphireDevils.conferenceManagementSystem.Model.Author;
+import com.sapphireDevils.conferenceManagementSystem.Model.Paper;
 import com.sapphireDevils.conferenceManagementSystem.Service.AbstractService;
 import com.sapphireDevils.conferenceManagementSystem.Service.AuthorService;
 import com.sapphireDevils.conferenceManagementSystem.Service.BaseService;
+import com.sapphireDevils.conferenceManagementSystem.Service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,18 @@ public class AuthorController extends BaseController<Author> {
             return Response.getErrorResponse(e.getMessage());
         }
     }
+
+    @PostMapping("/{id}/uploadpaper") // request gen localhost:9090/author/1/uploadPaper
+    public Response uploadPaper(@RequestBody Paper paperData, @PathVariable int id) {
+        try {
+            System.out.println(paperData);
+            return new Response(authorService.uploadPaper(paperData, id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.getErrorResponse(e.getMessage());
+        }
+    }
+
 
     @Override
     @GetMapping

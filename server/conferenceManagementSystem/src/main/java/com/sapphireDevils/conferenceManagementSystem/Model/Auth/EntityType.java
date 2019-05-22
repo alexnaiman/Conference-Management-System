@@ -3,8 +3,10 @@ package com.sapphireDevils.conferenceManagementSystem.Model.Auth;
 import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserAllDataDto;
 import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserRegisterDto;
 import com.sapphireDevils.conferenceManagementSystem.Model.Author;
+import com.sapphireDevils.conferenceManagementSystem.Model.SteeringCommittee;
 import com.sapphireDevils.conferenceManagementSystem.Repository.AuthorRepository;
 import com.sapphireDevils.conferenceManagementSystem.Repository.Auth.RoleRepository;
+import com.sapphireDevils.conferenceManagementSystem.Repository.BaseRepository;
 import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public enum EntityType {
         }
 
         @Override
-        public UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, AuthorRepository authorRepository) {
+        public UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, BaseRepository authorRepository) {
             Author author = modelMapper.map(accountDto, Author.class);
             author.getUser().setPassword(encodedPassword);
             author.getUser().setRoles(Collections.singletonList(roleRepository.findByName(name())));
@@ -30,8 +32,25 @@ public enum EntityType {
             allData.setEntityType(EntityType.AUTHOR);
             return allData;
         }
-    };
+    },
 
+
+    STEERING_COMMITEE {
+        @Override
+        public List<Privilege> getPrivileges() {
+            return Arrays.asList(new Privilege("READ_CONFERENCE"), new Privilege("WRITE_CONFERENCE"));
+        }
+
+        @Override
+        public UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, AuthorRepository authorRepository) {
+            SteeringCommittee steeringCommittee = modelMapper.map(accountDto, SteeringCommittee.class);
+            steeringCommittee.getUser().setPassword(encodedPassword);
+            steeringCommittee.getUser().setRoles(Collections.singletonList(roleRepository.findByName(name())));
+            UserAllDataDto allData = modelMapper.map(steeringCommitteeRepository.save(steeringCommittee).getUser(), UserAllDataDto.class);
+            allData.setEntityType(EntityType.AUTHOR);
+            return allData;
+        }
+    };
 
     /**
      * Function for creating the privilege of each role -- an entity is seen as a role which is composed from different privileges
@@ -44,5 +63,5 @@ public enum EntityType {
      *
      * @return Dto containing all user data
      */
-    public abstract UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, AuthorRepository authorRepository);
+    public abstract UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, BaseRepository authorRepository);
 }

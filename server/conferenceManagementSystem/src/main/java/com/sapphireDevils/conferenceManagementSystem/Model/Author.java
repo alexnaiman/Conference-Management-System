@@ -21,4 +21,7 @@ public class Author extends BaseEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Abstract> abstracts = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Paper> papers = new HashSet<>();
 }
