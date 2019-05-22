@@ -1,5 +1,7 @@
 package com.sapphireDevils.conferenceManagementSystem.Model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,13 +15,13 @@ import java.util.Set;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = {"authors"})
-public class Paper extends BaseEntity {
-
+public class Paper extends BaseEntity{
     @NotNull
     private String title;
     @NotNull
     private String content; // TODO make to store file
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Author> authors = new HashSet<>();
 }
