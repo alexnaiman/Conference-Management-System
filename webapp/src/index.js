@@ -9,6 +9,7 @@ import App from "./routes/App";
 import * as serviceWorker from "./serviceWorker";
 import reset from "./css/reset";
 import browserHistory from "./config/history/history";
+import { CookiesProvider } from "react-cookie";
 
 import store from "./mobx";
 
@@ -25,12 +26,14 @@ const history = syncHistoryWithStore(browserHistory, routingStore);
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Fragment>
-      <Router history={history}>
-        <App />
-      </Router>
-      <GlobalStyle />
-    </Fragment>
+    <CookiesProvider>
+      <Fragment>
+        <Router history={history}>
+          <App />
+        </Router>
+        <GlobalStyle />
+      </Fragment>
+    </CookiesProvider>
   </Provider>,
   document.getElementById("root")
 );

@@ -17,6 +17,7 @@ const create = (baseURL = "http://localhost:9090/") => {
 
   api.addResponseTransform(response => {
     if (response.status === 401) {
+      //TODO ADD MOBX STORE AUTH
       browserHistory.push("/login");
     }
   });

@@ -15,6 +15,7 @@ const authStore = types
   })
   .views(self => ({
     get isLoggedIn() {
+      console.log(self.userData.email);
       return !!self.userData.email;
     }
   }))
@@ -22,16 +23,16 @@ const authStore = types
     setLoading: value => {
       self.isLoading = value;
     },
-    setError: (code, message) => {
-      self.error = message.split(".")[0];
+    setError: error => {
+      self.error = error;
       self.setLoading(false);
     },
     setUser: user => {
       console.log(user);
       self.userData = User.create({
         email: user.email,
-        name: user.displayName,
-        image: user.photoURL
+        name: user.displayName
+        // image: user.photoURL
       });
       self.setLoading(false);
     },

@@ -12,16 +12,21 @@ import { RoutePrivate, RoutePublic } from "../components";
 import Dashboard from "./Dashboard/Dashboard";
 import NotFound from "./NotFound/NotFound";
 import { AppWrapper } from "../components";
+import Cookies from "js-cookie";
+import { withCookies } from "react-cookie";
 
 @inject("routing", "store")
 @withRouter
+@withCookies
 @observer
 export default class App extends Component {
   render() {
     const {
+      cookies,
       store: { auth }
     } = this.props;
-
+    // cookies.set("sf", 2);
+    console.log(cookies.get("sf"));
     return (
       <ThemeProvider theme={theme}>
         <AppWrapper>

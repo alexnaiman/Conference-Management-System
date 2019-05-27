@@ -1,0 +1,107 @@
+// body,
+// html {
+//   height: 100%;
+// }
+
+/* The hero image */
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(315deg,
+      rgba(0, 228, 169, 0.7),
+      rgba(0, 122, 228, 0.7)),
+    url("https://static1.squarespace.com/static/55115f04e4b0f4baa9ed963c/t/5b61ad7388251bdab3de1a16/1533201518204/conference+image+resize.jpg?format=1500w");
+  /* Set a specific height */
+  height: 100vh;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.half {
+  align-self: center
+}
+
+.login-container {
+  height: 100vh;
+  justify-content: space-between !important;
+}
+
+.login-card {
+  position: relative;
+  max-width: 450px;
+  // padding: 20px;
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, .5);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .5);
+}
+
+.card-header {
+  padding: 1.25rem 1.25rem 0 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+
+  .card-title {
+    margin-bottom: 10px;
+    color: rgba(23, 31, 35, .87);
+    font-size: 2rem;
+    font-weight: 500;
+
+    span {
+      color: #3075BA;
+    }
+  }
+
+  .card-subtitle {
+    font-size: .875rem;
+    line-height: 1.6;
+    color: rgba(23, 31, 35, .64);
+  }
+}
+
+.card-body {
+  padding: 0 1.25rem;
+  // margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.loader {
+  color: rgba(0, 228, 169, 1);
+  font-size: 25px;
+
+  &Container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+  }
+}
+
+.error {
+  width: 100%;
+  color: #ED2839;
+}
+
+.loginTitle {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 700;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.loginPresentation {
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 25px;
+}
+
+.loginSmallPresentation {
+  font-size: 14px;
+  color: white
+}

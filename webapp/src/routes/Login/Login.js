@@ -7,28 +7,28 @@ import Login from "../../module/Login/Login";
 @observer
 export default class LoginRoute extends Component {
   state = {};
+  login = ({ email, password }) => {
+    const {
+      store: {
+        auth: { login }
+      }
+    } = this.props;
+    // console.log(email, password);
+    login({ email, password });
+  };
   render() {
     const {
       store: {
-        auth: { isLoading, register }
+        auth: { isLoading, register, error }
       }
     } = this.props;
     return (
-      <div
-        onClick={() =>
-          register({
-            email: "alex@email.com",
-            password: "password",
-            affiliation: "sdfs",
-            webpage: "sdfsd",
-            entityType: "author",
-            name: "Alex"
-          })
-        }
-      >
-        <Login />
-        {isLoading && "...Loading"}
-      </div>
+      <Login
+        isLoading={isLoading}
+        register={register}
+        login={this.login}
+        error={error}
+      />
     );
   }
 }
