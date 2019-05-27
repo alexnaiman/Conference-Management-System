@@ -1,10 +1,10 @@
-import { create } from "./api";
+import api from "./api";
 
 let instance = null;
 
 export default function getApi() {
   if (!instance) {
-    instance = create();
+    instance = api.create();
   }
   return instance;
 }

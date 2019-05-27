@@ -7,8 +7,8 @@ const user = types.model("User", {
   name: types.maybeNull(types.string),
   email: types.maybeNull(types.string),
   affiliation: types.maybeNull(types.string),
-  webpage: types.maybeNull(types.string)
-  // role: types.maybeNull(types.enumeration('role',['TRAINER', 'EMPLOYEE'])),
+  webpage: types.maybeNull(types.string),
+  entityType: types.maybeNull(types.enumeration("type", ["AUTHOR"]))
 });
 
 export default user;

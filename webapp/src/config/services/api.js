@@ -1,10 +1,10 @@
 // a library to wrap and simplify api calls
 import apisauce from "apisauce";
-import { browserHistory } from "react-router";
+import browserHistory from "../history/history";
 
 // our "constructor"
 // http://localhost:8080/ is the address of the spring server
-const create = (baseURL = "https://api.github.com/") => {
+const create = (baseURL = "http://localhost:9090/") => {
   const api = apisauce.create({
     // base URL is read from the "constructor"
     baseURL,
@@ -23,10 +23,10 @@ const create = (baseURL = "https://api.github.com/") => {
 
   return {
     // a list of the API functions
-    // login: (username, password) =>
-    //   api.post(`/api_login?username=${username}&password=${password}`),
-    // logout: () => api.get("/logout"),
-    // register: data => api.post("/register", data),
+    login: (email, password) =>
+      api.post(`/api_login?email=${email}&password=${password}`),
+    logout: () => api.get("/logout"),
+    register: data => api.post("/register", data),
     // getOffers: () => api.get("/offer"),
     // getCauses: () => api.get("/cause"),
     // getOwnOffers: () => api.get("/offer/getOwn"),
