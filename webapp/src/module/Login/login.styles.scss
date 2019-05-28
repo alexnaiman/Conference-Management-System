@@ -7,7 +7,7 @@
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(315deg,
-      rgba(0, 228, 169, 0.7),
+      rgba(188, 252, 235, 0.7),
       rgba(0, 122, 228, 0.7)),
     url("https://static1.squarespace.com/static/55115f04e4b0f4baa9ed963c/t/5b61ad7388251bdab3de1a16/1533201518204/conference+image+resize.jpg?format=1500w");
   /* Set a specific height */
@@ -104,4 +104,20 @@
 .loginSmallPresentation {
   font-size: 14px;
   color: white
+}
+
+.redirectAuthLink {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 5px;
+  a {
+    color: #3075BA;
+    margin-left: 5px;
+    font-weight: 700
+  }
+
+  a:hover {
+    color: rgba(0, 228, 169, 1);
+
+  }
 }

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
-import Login from "../../module/Login/Login";
+import Register from "../../module/Register/Register";
 // the smart component that is linked to the store
 
 @inject("store")
 @observer
-export default class LoginRoute extends Component {
+export default class RegisterRoute extends Component {
   state = {};
   login = ({ email, password }) => {
     const {
@@ -22,8 +22,9 @@ export default class LoginRoute extends Component {
         auth: { isLoading, register, error, setError }
       }
     } = this.props;
+
     return (
-      <Login
+      <Register
         isLoading={isLoading}
         register={register}
         login={this.login}

@@ -27,7 +27,10 @@ const create = (baseURL = "http://localhost:9090/") => {
     login: (email, password) =>
       api.post(`/api_login?email=${email}&password=${password}`),
     logout: () => api.get("/logout"),
-    register: data => api.post("/register", data),
+    register: data => {
+      console.log(data);
+      return api.post("/register", data);
+    },
     // getOffers: () => api.get("/offer"),
     // getCauses: () => api.get("/cause"),
     // getOwnOffers: () => api.get("/offer/getOwn"),

@@ -64,6 +64,7 @@ const authStore = types
       const result = yield api.register(data);
       if (result.ok) {
         self.login(data);
+        yield self.login(data);
       } else {
         self.setError(result.data);
       }

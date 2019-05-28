@@ -1,10 +1,27 @@
 import React, { Component } from "react";
 
-import "./login.styles.scss";
+import "../Login/login.styles.scss";
 import { Link } from "react-router-dom";
 import { Input, AuthButton } from "../../components";
+import { Form } from "react-bootstrap";
+
+const ENTITY_TYPES = [
+  {
+    label: "Author",
+    value: "AUTHOR"
+  },
+  {
+    label: "Steering committee",
+    value: "STEERING_COMMITTEE"
+  },
+  {
+    label: "Reviewer",
+    value: "REVIEWER"
+  }
+];
+
 // one dumb component in which we pass props and actions
-export default class Login extends Component {
+export default class Register extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -12,7 +29,11 @@ export default class Login extends Component {
   }
   state = {
     email: "",
-    password: ""
+    password: "",
+    name: "",
+    affiliation: "",
+    webpage: "",
+    entityType: ENTITY_TYPES[0].value
   };
 
   handleChange(value, name) {
@@ -20,17 +41,53 @@ export default class Login extends Component {
   }
 
   handleSubmit(e) {
-    const { login, setError } = this.props;
-    const { email, password } = this.state;
+    const { register, setError } = this.props;
+    const {
+      email,
+      password,
+      name,
+      affiliation,
+      webpage,
+      entityType
+    } = this.state;
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    re.test(email) || password.length > 6
-      ? login({ email, password })
-      : setError("Invalid email or password");
+    if (!re.test(email)) {
+      setError("Invalid email");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Invalid password");
+      return;
+    }
+    if (!name) {
+      setError("Name field is required");
+      return;
+    }
+    if (!affiliation) {
+      setError("Affiliation field is required");
+      return;
+    }
+    if (!webpage) {
+      setError("Webpage field is required");
+      return;
+    }
+    if (!entityType) {
+      setError("Entity field is required");
+      return;
+    }
+    register({ email, password, affiliation, webpage, entityType, name });
   }
 
   render() {
     const { isLoading, error } = this.props;
-    const { email, password } = this.state;
+    const {
+      email,
+      password,
+      name,
+      affiliation,
+      webpage,
+      entityType
+    } = this.state;
     return (
       <div className="hero-image">
         <div className="container">
@@ -49,7 +106,7 @@ export default class Login extends Component {
                 <div>
                   <div className="card-body">
                     <Input
-                      name="emasfsdil"
+                      name="email"
                       icon={<i className="far fa-user" />}
                       label="Email"
                       value={email}
@@ -65,6 +122,43 @@ export default class Login extends Component {
                       }
                       type="password"
                     />
+                    <Input
+                      name="name"
+                      icon={<i className="fas fa-signature" />}
+                      label="Name"
+                      value={name}
+                      onChange={e => this.handleChange(e.target.value, "name")}
+                    />
+                    <Input
+                      name="affiliation"
+                      icon={<i className="fas fa-users" />}
+                      label="Affiliation"
+                      value={affiliation}
+                      onChange={e =>
+                        this.handleChange(e.target.value, "affiliation")
+                      }
+                    />
+                    <Input
+                      name="webpage"
+                      icon={<i className="fas fa-globe-europe" />}
+                      label="Web page"
+                      value={webpage}
+                      onChange={e =>
+                        this.handleChange(e.target.value, "webpage")
+                      }
+                    />
+                    <Form.Control
+                      as="select"
+                      onChange={e =>
+                        this.handleChange(e.target.value, "entityType")
+                      }
+                    >
+                      {ENTITY_TYPES.map(item => (
+                        <option value={item.value} key={item.value}>
+                          {item.label}
+                        </option>
+                      ))}
+                    </Form.Control>
                     {error && <div className="error">{error}</div>}
                     {/* <input type="submit" value="Submit" /> */}
                     <AuthButton onClick={this.handleSubmit}>submit</AuthButton>
@@ -74,8 +168,7 @@ export default class Login extends Component {
                       </div>
                     )}
                     <div className="redirectAuthLink">
-                      Don't have an account? Sign up{" "}
-                      <Link to="/register"> here</Link>
+                      Log in <Link to="/login">here</Link>
                     </div>
                   </div>
                 </div>
