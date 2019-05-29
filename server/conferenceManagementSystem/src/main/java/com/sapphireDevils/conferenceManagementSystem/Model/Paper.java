@@ -23,8 +23,11 @@ public class Paper extends BaseEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Author> authors = new HashSet<>();
 
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Review> reviewers = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Conference conference;
 }

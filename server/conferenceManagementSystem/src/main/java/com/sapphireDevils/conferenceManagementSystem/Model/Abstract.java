@@ -19,12 +19,17 @@ public class Abstract extends BaseEntity {
     @NotNull
     private String content; // TODO make to store file
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Author> authors = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Bidding> reviewers = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Conference conference;
 }
 
 

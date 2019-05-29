@@ -26,22 +26,22 @@ public class AuthorController extends BaseController<Author> {
         return authorService;
     }
 
-    @PostMapping("/{id}/upload") // request gen localhost:9090/author/1/upload
-    public Response uploadAbstract(@RequestBody Abstract abstractData, @PathVariable int id) {
+    @PostMapping("/{id}/{conferenceId}/upload") // request gen localhost:9090/author/1/upload
+    public Response uploadAbstract(@RequestBody Abstract abstractData, @PathVariable int id, @PathVariable int conferenceId) {
         try {
             System.out.println(abstractData);
-            return new Response(authorService.uploadAbstract(abstractData, id));
+            return new Response(authorService.uploadAbstract(abstractData, id, conferenceId));
         } catch (Exception e) {
             e.printStackTrace();
             return Response.getErrorResponse(e.getMessage());
         }
     }
 
-    @PostMapping("/{id}/uploadpaper") // request gen localhost:9090/author/1/uploadpaper
-    public Response uploadPaper(@RequestBody Paper paperData, @PathVariable int id) {
+    @PostMapping("/{id}/{conferenceId}/uploadPaper") // request gen localhost:9090/author/1/uploadpaper
+    public Response uploadPaper(@RequestBody Paper paperData, @PathVariable int id, @PathVariable int conferenceId) {
         try {
             System.out.println(paperData);
-            return new Response(authorService.uploadPaper(paperData, id));
+            return new Response(authorService.uploadPaper(paperData, id ,conferenceId));
         } catch (Exception e) {
             e.printStackTrace();
             return Response.getErrorResponse(e.getMessage());
