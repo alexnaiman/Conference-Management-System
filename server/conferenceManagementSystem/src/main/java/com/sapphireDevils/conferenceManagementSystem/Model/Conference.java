@@ -11,13 +11,15 @@ import java.util.Set;
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true, exclude = {"steeringCommittee", "chair", "abstracts", "papers", "reviews"})
+@EqualsAndHashCode(callSuper = true, exclude = {"steeringCommittee", "chair", "abstracts", "papers", "reviewers"})
 public class Conference extends BaseEntity {
 
     private String name;
     private String location;
     private String theme;
     private Date date;
+    private Date firstDeadline;
+    private Date secondDeadline;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SteeringCommittee steeringCommittee;
@@ -34,5 +36,6 @@ public class Conference extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Reviewer> reviewers = new HashSet<>();
 
+    private ConferencePhase conferencePhase = ConferencePhase.FIRST;
 
 }

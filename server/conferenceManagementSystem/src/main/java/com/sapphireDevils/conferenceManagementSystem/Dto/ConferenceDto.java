@@ -17,4 +17,6 @@ public class ConferenceDto extends BaseDto {
     private Date date;
     private String chairEmail;
     private Set<String> reviewers;
+    private Date firstDeadline;
+    private Date secondDeadline;
 }

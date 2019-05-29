@@ -1,5 +1,6 @@
 package com.sapphireDevils.conferenceManagementSystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sapphireDevils.conferenceManagementSystem.Model.Auth.BaseUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class Chair extends BaseUser {
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Conference> conferences = new HashSet<>();
 }

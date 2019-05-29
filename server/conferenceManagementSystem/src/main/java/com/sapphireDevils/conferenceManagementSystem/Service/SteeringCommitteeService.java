@@ -39,15 +39,16 @@ public class SteeringCommitteeService extends BaseService<SteeringCommittee> {
     }
 
 
-    public ConferenceDto createConference(ConferenceDto conferenceDto, int id) {
+    public Conference createConference(ConferenceDto conferenceDto, int id) {
         SteeringCommittee steeringCommittee = getOne(id);
         if (steeringCommittee == null)
             throw new RuntimeException("Cannot find user");
         Conference conference = modelMapper.map(conferenceDto, Conference.class);
-
         steeringCommittee.getConferences().add(conference);
         conference.setSteeringCommittee(steeringCommittee);
 
+        System.out.println(conferenceDto.getChairEmail());
+        chairRepository.findAll().forEach(x -> System.out.println(x.getUser().getEmail()));
         Chair chair = chairRepository.findAll().stream().filter(x -> x.getUser().getEmail().equals(conferenceDto.getChairEmail())).collect(Collectors.toList()).get(0);
 
         chair.getConferences().add(conference);
@@ -61,6 +62,6 @@ public class SteeringCommitteeService extends BaseService<SteeringCommittee> {
             conference.getReviewers().add(rev);
         });
         conferenceRepository.save(conference);
-        return modelMapper.map(conference, ConferenceDto.class);
+        return conference;
     }
 }
