@@ -3,6 +3,8 @@ package com.sapphireDevils.conferenceManagementSystem.Model.Auth;
 import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserAllDataDto;
 import com.sapphireDevils.conferenceManagementSystem.Dto.Auth.UserRegisterDto;
 import com.sapphireDevils.conferenceManagementSystem.Model.Author;
+import com.sapphireDevils.conferenceManagementSystem.Model.Chair;
+import com.sapphireDevils.conferenceManagementSystem.Model.Reviewer;
 import com.sapphireDevils.conferenceManagementSystem.Model.SteeringCommittee;
 import com.sapphireDevils.conferenceManagementSystem.Repository.Auth.BaseUserRepository;
 import com.sapphireDevils.conferenceManagementSystem.Repository.AuthorRepository;
@@ -54,7 +56,44 @@ public enum EntityType {
             allData.setEntityType(EntityType.STEERING_COMMITTEE);
             return allData;
         }
+    },
+
+
+    REVIEWER {
+        @Override
+        public List<Privilege> getPrivileges() {
+            return Arrays.asList(new Privilege("READ_CONFERENCE"), new Privilege("WRITE_CONFERENCE"));
+        }
+
+        @Override
+        public UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, BaseUserRepository repository) {
+            Reviewer reviewer = modelMapper.map(accountDto, Reviewer.class);
+            reviewer.getUser().setPassword(encodedPassword);
+            reviewer.getUser().setRoles(Collections.singletonList(roleRepository.findByName(name())));
+            repository.save(reviewer);
+            UserAllDataDto allData = modelMapper.map(reviewer.getUser(), UserAllDataDto.class);
+            allData.setEntityType(EntityType.REVIEWER);
+            return allData;
+        }
+    },
+
+    CHAIR {
+        @Override
+        public List<Privilege> getPrivileges() {
+            return Arrays.asList(new Privilege("READ_CONFERENCE"), new Privilege("WRITE_CONFERENCE"));
+        }
+
+        @Override
+        public UserAllDataDto create(ModelMapper modelMapper, String encodedPassword, UserRegisterDto accountDto, RoleRepository roleRepository, BaseUserRepository repository) {
+            Chair chair = modelMapper.map(accountDto, Chair.class);
+            chair.getUser().setPassword(encodedPassword);
+            chair.getUser().setRoles(Collections.singletonList(roleRepository.findByName(name())));
+            repository.save(chair);
+            UserAllDataDto allData = modelMapper.map(chair.getUser(), UserAllDataDto.class);
+            allData.setEntityType(EntityType.CHAIR);
+            return allData;        }
     };
+
 
     /**
      * Function for creating the privilege of each role -- an entity is seen as a role which is composed from different privileges

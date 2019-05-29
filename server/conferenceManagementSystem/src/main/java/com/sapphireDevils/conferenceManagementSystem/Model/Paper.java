@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = {"authors"})
-public class Paper extends BaseEntity{
+public class Paper extends BaseEntity {
     @NotNull
     private String title;
     @NotNull
@@ -24,4 +22,9 @@ public class Paper extends BaseEntity{
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Author> authors = new HashSet<>();
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Review> reviewers = new HashSet<>();
 }

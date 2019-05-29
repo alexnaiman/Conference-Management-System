@@ -1,5 +1,6 @@
 package com.sapphireDevils.conferenceManagementSystem.Controller;
 
+import com.sapphireDevils.conferenceManagementSystem.Dto.ConferenceDto;
 import com.sapphireDevils.conferenceManagementSystem.Model.Conference;
 import com.sapphireDevils.conferenceManagementSystem.Model.SteeringCommittee;
 import com.sapphireDevils.conferenceManagementSystem.Service.BaseService;
@@ -22,7 +23,7 @@ public class SteeringCommitteeController extends BaseController<SteeringCommitte
 
     @PostMapping("/{id}/createConference")
     @PreAuthorize("hasAuthority('WRITE_CONFERENCE')") // DOAR ASTA MERGE
-    public Response create(@RequestBody Conference entity, @PathVariable int id) {
+    public Response create(@RequestBody ConferenceDto entity, @PathVariable int id) {
         try {
             System.out.println(entity);
             return new Response(steeringCommitteeService.createConference(entity, id));

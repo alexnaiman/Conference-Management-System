@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -14,5 +15,6 @@ public class ConferenceDto extends BaseDto {
     private String location;
     private String theme;
     private Date date;
-    private SteeringCommiteeDto steeringCommittee;
+    private String chairEmail;
+    private Set<String> reviewers;
 }
